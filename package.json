@@ -1,0 +1,15 @@
+{
+  "name": "jaceyln-wu-workbench",
+  "version": "1.0.0",
+  "description": "jaceyln wu 工作台 — 抖音创作者桌面工作台（任务/时间/复盘/爆款灵感/学习资料）",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "crawl": "python3 douyin_crawler.py"
+  },
+  "author": "jaceyln wu",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^30.0.0"
+  }
+}

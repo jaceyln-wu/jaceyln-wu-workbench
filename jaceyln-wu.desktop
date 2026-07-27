@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=jaceyln wu · 工作台
+Comment=抖音创作者桌面工作台 — 任务/时间/复盘/爆款灵感/学习资料
+Icon=jaceyln-wu
+Exec=chromium --app="file:///workspace/index.html" --window-size=1320,860 --name=jaceyln-wu
+Terminal=false
+Categories=Utility;Office;
+StartupWMClass=jaceyln-wu
