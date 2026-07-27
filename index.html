@@ -199,6 +199,89 @@ button{cursor:pointer;font-family:inherit;font-size:14px;border:none;border-radi
 .cal-cell.has-tasks .cal-dot{display:inline-block;font-size:10px;background:var(--accent2);color:#fff;border-radius:10px;padding:1px 7px;font-weight:600;margin-left:4px;vertical-align:top}
 .cal-cell.has-tasks::after{content:'';position:absolute;bottom:6px;right:8px;width:6px;height:6px;border-radius:50%;background:var(--accent2)}
 @media(max-width:900px){.cols-2,.cols-3,.cols-4{grid-template-columns:1fr}.top-right{display:none}}@media(max-width:560px){.app{grid-template-columns:52px 1fr}.brand b,.brand small,.nav-item .lb{display:none}.nav-item{justify-content:center;padding:9px 6px}.brand .dot{width:26px;height:26px;font-size:12px}.cal-cell{min-height:48px}}
+/* ---------- KPI / board / pomodoro / insp / learning cards ---------- */
+.kpi-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}
+.kpi-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.kpi-card .num{font-size:28px;font-weight:800;line-height:1;color:var(--ink)}
+.kpi-card .lbl{font-size:12px;color:var(--muted);margin-top:6px}
+.kpi-card .emo{position:absolute;right:14px;top:12px;font-size:26px;opacity:.16}
+.kpi-card:nth-child(1) .num{color:var(--accent)}
+.kpi-card:nth-child(2) .num{color:var(--good)}
+.kpi-card:nth-child(3) .num{color:var(--warn)}
+.kpi-card:nth-child(4) .num{color:var(--accent3)}
+.board-layout{display:grid;grid-template-columns:240px 1fr;gap:18px}
+.preset-col .preset-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);margin-bottom:14px}
+.preset-col h4{margin:0 0 12px;font-size:14px;color:var(--ink)}
+.preset-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;background:#fcfbf8;border:1px solid var(--line);margin-bottom:8px;font-size:12.5px;cursor:pointer;transition:.12s}
+.preset-item:hover{border-color:var(--accent);background:#fdf2f4}
+.preset-item .pi-icon{font-size:15px}
+.preset-item .pi-text{flex:1}
+.preset-item .pi-add{color:var(--accent);font-size:16px;font-weight:700}
+.board-area{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.board-col{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);min-height:220px}
+.board-col h4{margin:0 0 14px;font-size:14px;display:flex;align-items:center;gap:8px}
+.board-col h4 .count{margin-left:auto;font-size:12px;color:var(--muted);font-weight:400}
+.task-card{border:1px solid var(--line);border-radius:12px;padding:13px;background:#fff;margin-bottom:10px;transition:.15s;position:relative}
+.task-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow)}
+.task-card .tc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.task-card .tc-time{font-size:12px;font-weight:700;color:var(--accent3)}
+.task-card .tc-title{font-size:13.5px;font-weight:700;line-height:1.45;margin-bottom:8px}
+.task-card .tc-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.task-card .tc-actions{display:flex;gap:6px;flex-wrap:wrap}
+.task-card .tc-actions button{font-size:11px;padding:5px 9px;border-radius:7px}
+.task-card.done{opacity:.72;background:#f8f9f6}
+.task-card.done .tc-title{text-decoration:line-through;color:var(--muted)}
+.task-card .tc-pomo{font-size:11px;color:var(--muted)}
+.scheduled-list{margin-top:14px}
+.scheduled-item{font-size:12px;padding:8px 10px;border-radius:8px;background:#fff7f0;border:1px solid #f2e0d0;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.scheduled-item .sd-date{color:var(--warn);font-weight:700}
+/* pomodoro overlay */
+.pomo-overlay{position:fixed;inset:0;background:linear-gradient(135deg,#4a3e4c,#3d3240);z-index:200;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px}
+.pomo-quote{font-size:18px;line-height:1.7;max-width:520px;margin-bottom:40px;opacity:.9;font-weight:300}
+.pomo-task{font-size:16px;color:#e8dfe6;margin-bottom:20px}
+.pomo-task b{color:#fff}
+.pomo-time{font-size:96px;font-weight:200;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-2px;margin-bottom:12px}
+.pomo-mode{font-size:14px;color:#aa9cb0;margin-bottom:40px;text-transform:uppercase;letter-spacing:2px}
+.pomo-controls{display:flex;gap:18px;align-items:center;justify-content:center;flex-wrap:wrap}
+.pomo-controls button{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:50%;width:56px;height:56px;display:flex;align-items:center;justify-content:center;font-size:20px;padding:0;transition:.15s}
+.pomo-controls button:hover{background:rgba(255,255,255,.22)}
+.pomo-controls .pomo-main{width:80px;height:80px;font-size:32px;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none}
+.pomo-controls .pomo-main:hover{filter:brightness(1.08)}
+.pomo-close{position:absolute;top:20px;right:24px;background:none;border:none;color:#aa9cb0;font-size:24px;cursor:pointer;padding:8px}
+.pomo-settings{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;gap:12px;align-items:center;color:#aa9cb0;font-size:12px}
+.pomo-settings input{width:60px;background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2);padding:6px;border-radius:8px;text-align:center}
+/* inspiration cards */
+.insp-header{background:linear-gradient(135deg,#fefdfa,#faf4f6);border:2px dashed var(--accent);border-radius:18px;padding:22px;text-align:center;margin-bottom:20px}
+.insp-header h3{margin:0 0 8px;font-size:17px}
+.insp-header p{margin:0;font-size:13px;color:var(--muted)}
+.insp-list{display:flex;flex-direction:column;gap:14px}
+.insp-card{border:1px solid var(--line);border-radius:16px;padding:18px;background:var(--panel);box-shadow:var(--shadow);transition:.15s}
+.insp-card:hover{border-color:var(--accent)}
+.insp-card .ic-title{font-size:15px;font-weight:800;line-height:1.45;margin-bottom:8px}
+.insp-card .ic-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.insp-card .ic-tag{font-size:11px;padding:3px 10px;border-radius:20px;background:#f3efe9;color:var(--muted);font-weight:600}
+.insp-card .ic-desc{font-size:13px;color:#5f5666;line-height:1.7;margin-bottom:12px}
+.insp-card .ic-actions{display:flex;gap:8px;flex-wrap:wrap}
+.insp-card .ic-actions button{font-size:12px;padding:7px 13px;border-radius:8px}
+.insp-card .ic-actions .btn-ghost{background:#f3efe9;color:var(--ink)}
+.insp-card .ic-actions .btn-ghost:hover{background:#eae4da}
+/* learning resource cards */
+.res-list{display:flex;flex-direction:column;gap:14px}
+.res-card2{border:1px solid var(--line);border-radius:16px;padding:16px;background:var(--panel);box-shadow:var(--shadow);transition:.15s}
+.res-card2:hover{border-color:var(--accent);transform:translateY(-2px)}
+.res-card2 .rc-head{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.res-card2 .rc-title{font-size:15px;font-weight:800;margin-bottom:6px}
+.res-card2 .rc-desc{font-size:13px;color:#5f5666;line-height:1.6;margin-bottom:12px}
+.res-card2 .rc-thumb{background:var(--bg);border-radius:12px;height:140px;display:flex;align-items:center;justify-content:center;flex-direction:column;margin-bottom:12px;overflow:hidden;border:1px solid var(--line);position:relative}
+.res-card2 .rc-thumb .rc-plat-ico{font-size:48px;opacity:.25}
+.res-card2 .rc-thumb .rc-plat-name{font-size:13px;color:var(--muted);margin-top:6px}
+.res-card2 .rc-meta{font-size:11px;color:var(--muted);position:absolute;bottom:8px;left:12px}
+.res-card2 .rc-actions{display:flex;gap:8px;flex-wrap:wrap}
+.res-card2 .rc-actions button{font-size:12px;padding:7px 12px;border-radius:8px}
+.res-card2 .rc-actions .btn-ghost{background:#f3efe9;color:var(--ink)}
+.res-card2 .rc-actions .btn-ghost:hover{background:#eae4da}
+@media(max-width:900px){.kpi-bar{grid-template-columns:repeat(2,1fr)}.board-layout{grid-template-columns:1fr}.board-area{grid-template-columns:1fr}.preset-col{order:2}}
+@media(max-width:560px){.kpi-bar{grid-template-columns:1fr 1fr}.pomo-time{font-size:64px}.pomo-quote{font-size:15px}}
 </style>
 </head>
 <body>
@@ -365,65 +448,244 @@ function renderHome(){
 }
 
 /* =========================================================
- *  TASKS — 每日计划表 + 每月计划表，互相链接
+ *  TASKS — TRAEWork 式卡片看板 + 番茄钟 + 预置日课
  * ========================================================= */
 let taskView='day'; // 'day' or 'month'
-let taskCalYear=0, taskCalMonth=0; // month view state
+let taskCalYear=0, taskCalMonth=0;
+let _viewDate = null; // 当前查看/编辑的日期
+
+const DEFAULT_PRESETS = [
+  {id:'p1', title:'🌅 晨间选题：刷抖音热点 + 选 1 个二创角度', cat:'qunxiang', time:'09:00'},
+  {id:'p2', title:'📝 拆解爆款：看 2 条对标视频并记录', cat:'qunxiang', time:'10:00'},
+  {id:'p3', title:'🎬 内容拍摄：按计划拍当日视频素材', cat:'vlog', time:'14:00'},
+  {id:'p4', title:'✂️ 剪辑发布：粗剪 + 文案 + 封面', cat:'vlog', time:'16:00'},
+  {id:'p5', title:'📚 学习充电：镜头语言 / 传播学 / 运营', cat:'know', time:'20:00'},
+  {id:'p6', title:'🌍 英语学习：雅思单词 / 口语 / 听力', cat:'study', time:'21:00'},
+  {id:'p7', title:'🔁 复盘记录：今日数据 + 明天计划', cat:'work', time:'22:00'}
+];
+function getPresets(){ return LS.get('presetTemplates', DEFAULT_PRESETS); }
+function getPomoSettings(){ return LS.get('pomoSettings', {focus:25, break:5}); }
 
 function renderTasks(){
   if(!taskCalYear){ const d=new Date(); taskCalYear=d.getFullYear(); taskCalMonth=d.getMonth()+1; }
-  const selDate = taskView==='day' ? today() : null;
+  const date = _viewDate || today();
+
+  if(taskView==='month'){
+    document.getElementById('view-tasks').innerHTML = `
+    <div class="task-tabs">
+      <button class="fbtn ${taskView==='day'?'active':''}" onclick="taskView='day';renderTasks()">📅 每日计划</button>
+      <button class="fbtn ${taskView==='month'?'active':''}" onclick="taskView='month';renderTasks()">🗓️ 每月计划</button>
+    </div>
+    ${renderMonthPlan()}`;
+    drawMonthCal();
+    return;
+  }
+
+  const tasks = LS.get('tasks',[]).filter(t=>t.date===date);
+  const total=tasks.length, done=tasks.filter(t=>t.done).length, todo=total-done;
+  const rate = total? Math.round(done/total*100) : 0;
 
   document.getElementById('view-tasks').innerHTML = `
   <div class="task-tabs">
-    <button class="fbtn ${taskView==='day'?'active':''}" onclick="taskView='day';renderTasks()">📅 每日计划</button>
-    <button class="fbtn ${taskView==='month'?'active':''}" onclick="taskView='month';renderTasks()">🗓️ 每月计划</button>
+    <button class="fbtn active" onclick="taskView='day';renderTasks()">📅 每日计划</button>
+    <button class="fbtn" onclick="taskView='month';renderTasks()">🗓️ 每月计划</button>
+    <button class="fbtn" onclick="openPomoSettings()">⚙️ 番茄钟设置</button>
   </div>
-  ${taskView==='day' ? renderDayPlan() : renderMonthPlan()}`;
 
-  if(taskView==='day') drawTaskList();
-  else drawMonthCal();
-}
+  <!-- KPI 概览 -->
+  <div class="kpi-bar">
+    <div class="kpi-card"><div class="emo">📋</div><div class="num">${total}</div><div class="lbl">今日任务</div></div>
+    <div class="kpi-card"><div class="emo">✅</div><div class="num">${done}</div><div class="lbl">已完成</div></div>
+    <div class="kpi-card"><div class="emo">⏳</div><div class="num">${todo}</div><div class="lbl">待完成</div></div>
+    <div class="kpi-card"><div class="emo">📈</div><div class="num">${rate}%</div><div class="lbl">完成率</div></div>
+  </div>
 
-/* ---- day plan ---- */
-function renderDayPlan(){
-  return `
-  <div class="grid cols-3">
-    <div class="card" style="grid-column:span 1">
-      <h3>➕ 添加任务 <span class="small muted" style="font-weight:400">${today()}</span></h3>
-      <div class="row" style="flex-direction:column;align-items:stretch">
-        <input id="tTitle" placeholder="任务内容，如：和闺蜜拍『歌名文案』第3期">
-        <div class="row">
-          <select id="tCat">${CATS.map(c=>`<option value="${c.id}">${c.name}</option>`).join('')}</select>
-          <input id="tTime" type="time" value="${nowStr()}">
-        </div>
-        <button class="btn" onclick="addTask()">添加到今日</button>
+  <div class="board-layout">
+    <!-- 左栏：个人日常 + 预定任务 -->
+    <div class="preset-col">
+      <div class="preset-card">
+        <h4>🌟 个人日常 · 日课模板</h4>
+        <div id="presetList"></div>
+        <button class="btn ghost sm" style="margin-top:10px;width:100%" onclick="applyAllPresets()">全部添加到今日</button>
       </div>
-      <p class="small muted" style="margin-top:12px">
-        提示：时间节点帮你把一天切成节奏。绑定赛道后可在效率统计看分布。<br>
-        <a href="#" onclick="taskView='month';renderTasks();return false" style="color:var(--accent)">🗓️ 查看本月计划 →</a>
-      </p>
+      <div class="preset-card">
+        <h4>📌 添加预定任务</h4>
+        <div class="row" style="flex-direction:column;align-items:stretch;gap:8px">
+          <input id="sTitle" placeholder="任务内容">
+          <input id="sDate" type="date" value="${today()}">
+          <input id="sTime" type="time" value="${nowStr()}">
+          <select id="sCat">${CATS.map(c=>`<option value="${c.id}">${c.name}</option>`).join('')}</select>
+          <button class="btn sm" onclick="addScheduledTask()">添加预定</button>
+        </div>
+      </div>
+      <div class="preset-card">
+        <h4>⏰ 即将到来的预定</h4>
+        <div id="scheduledList"></div>
+      </div>
     </div>
-    <div class="card" style="grid-column:span 2">
-      <h3>📋 今日任务 <span class="tag" id="taskCount"></span></h3>
-      <div id="taskList"></div>
+
+    <!-- 主区域：任务看板 -->
+    <div class="board-area">
+      <!-- 添加新任务 -->
+      <div class="board-col" style="grid-column:span 3">
+        <h4>➕ 添加任务 <span class="small muted">${date === today() ? '今日' : date}</span></h4>
+        <div class="row" style="flex-wrap:nowrap">
+          <input id="tTitle" placeholder="任务内容，如：和闺蜜拍『歌名文案』第3期" style="flex:2">
+          <select id="tCat" style="width:130px;flex:none">${CATS.map(c=>`<option value="${c.id}">${c.name}</option>`).join('')}</select>
+          <input id="tTime" type="time" value="${nowStr()}" style="width:110px;flex:none">
+          <button class="btn" onclick="addTask()" style="flex:none">添加</button>
+        </div>
+      </div>
+
+      <!-- 三列看板 -->
+      <div class="board-col">
+        <h4>🍅 进行中 <span class="count" id="colDoingCount">0</span></h4>
+        <div id="colDoing"></div>
+      </div>
+      <div class="board-col">
+        <h4>📌 待开始 <span class="count" id="colTodoCount">0</span></h4>
+        <div id="colTodo"></div>
+      </div>
+      <div class="board-col">
+        <h4>✅ 已完成 <span class="count" id="colDoneCount">0</span></h4>
+        <div id="colDone"></div>
+      </div>
     </div>
   </div>`;
+
+  drawTaskBoard();
+  drawPresets();
+  drawScheduled();
+  checkScheduledTasks();
 }
 
-function drawTaskList(){
-  const tasks = LS.get('tasks',[]).filter(t=>t.date===today()).sort((a,b)=>(a.time||'').localeCompare(b.time||''));
-  const el = document.getElementById('taskCount'); if(el) el.textContent = `${tasks.filter(t=>t.done).length}/${tasks.length} 已完成`;
-  const listEl = document.getElementById('taskList');
-  if(!listEl) return;
-  listEl.innerHTML = tasks.length? tasks.map(t=>`
-    <div class="task ${t.done?'done':''}">
-      <div class="chk" onclick="toggleTask('${t.id}')">${t.done?'✓':''}</div>
-      <div class="time">${esc(t.time||'--:--')}</div>
-      <div class="tt">${esc(t.title)}<div class="cat"><span class="chip" style="background:${catColor(t.cat)}">${catName(t.cat)}</span></div></div>
-      <button class="btn ghost sm" onclick="startTimer('${t.cat}','${escAttr(t.title)}')">⏱ 计时</button>
-      <button class="btn ghost sm" onclick="delTask('${t.id}')">删除</button>
-    </div>`).join('') : '<div class="empty">还没有任务，左边添加一条吧</div>';
+function drawPresets(){
+  const presets = getPresets();
+  const el = document.getElementById('presetList');
+  if(!el) return;
+  el.innerHTML = presets.map(p=>`
+    <div class="preset-item" onclick="addPresetTask('${p.id}')" title="点击添加到今日">
+      <span class="pi-icon">${p.title.charAt(0)}</span>
+      <span class="pi-text">${esc(p.title.slice(2))}<br><span class="small muted">${p.time} · ${catName(p.cat)}</span></span>
+      <span class="pi-add">+</span>
+    </div>`).join('');
+}
+
+function drawScheduled(){
+  const tasks = LS.get('tasks',[]);
+  const upcoming = tasks.filter(t=>t.date > today()).sort((a,b)=>a.date.localeCompare(b.date)||(a.time||'').localeCompare(b.time||''));
+  const el = document.getElementById('scheduledList');
+  if(!el) return;
+  el.innerHTML = upcoming.slice(0,5).map(t=>`
+    <div class="scheduled-item">
+      <span class="sd-date">${t.date.slice(5)}</span>
+      <span style="flex:1">${esc(t.title)}</span>
+      <button class="btn ghost sm" style="padding:3px 8px;font-size:11px" onclick="delTask('${t.id}')">删</button>
+    </div>`).join('') || '<div class="empty" style="padding:12px">暂无预定任务</div>';
+}
+
+function addPresetTask(pid){
+  const p = getPresets().find(x=>x.id===pid); if(!p) return;
+  const tasks=LS.get('tasks',[]);
+  tasks.push({id:uid(), title:p.title, cat:p.cat, time:p.time, date:today(), done:false, preset:true});
+  LS.set('tasks',tasks);
+  drawTaskBoard(); renderHome();
+  toast(`已添加日课：${p.title.slice(2)}`);
+}
+function applyAllPresets(){
+  const tasks=LS.get('tasks',[]);
+  getPresets().forEach(p=>{
+    if(!tasks.some(t=>t.date===today() && t.title===p.title)){
+      tasks.push({id:uid(), title:p.title, cat:p.cat, time:p.time, date:today(), done:false, preset:true});
+    }
+  });
+  LS.set('tasks',tasks);
+  drawTaskBoard(); renderHome();
+  toast('全部日课已添加');
+}
+function addScheduledTask(){
+  const title=document.getElementById('sTitle').value.trim();
+  if(!title){toast('先写任务内容');return;}
+  const date=document.getElementById('sDate').value;
+  if(!date || date < today()){toast('请选择今天或未来的日期');return;}
+  const tasks=LS.get('tasks',[]);
+  tasks.push({id:uid(), title, cat:document.getElementById('sCat').value, time:document.getElementById('sTime').value, date, done:false, scheduled:true});
+  LS.set('tasks',tasks);
+  document.getElementById('sTitle').value='';
+  drawScheduled(); renderHome();
+  toast('预定任务已添加');
+}
+
+function drawTaskBoard(){
+  const date = _viewDate || today();
+  const tasks = LS.get('tasks',[]).filter(t=>t.date===date).sort((a,b)=>(a.time||'').localeCompare(b.time||''));
+  const doing = tasks.filter(t=>!t.done && (t.pomodoros||0)>0);
+  const todo = tasks.filter(t=>!t.done && (!t.pomodoros||t.pomodoros===0));
+  const done = tasks.filter(t=>t.done);
+
+  document.getElementById('colDoing').innerHTML = doing.map(t=>taskCard(t)).join('') || '<div class="empty" style="padding:18px 0">点击任务开始专注</div>';
+  document.getElementById('colTodo').innerHTML = todo.map(t=>taskCard(t)).join('') || '<div class="empty" style="padding:18px 0">还没有待开始任务</div>';
+  document.getElementById('colDone').innerHTML = done.map(t=>taskCard(t)).join('') || '<div class="empty" style="padding:18px 0">还没有已完成任务</div>';
+
+  document.getElementById('colDoingCount').textContent = doing.length;
+  document.getElementById('colTodoCount').textContent = todo.length;
+  document.getElementById('colDoneCount').textContent = done.length;
+}
+
+function taskCard(t){
+  const pomoCount = t.pomodoros || 0;
+  return `
+    <div class="task-card ${t.done?'done':''}">
+      <div class="tc-top">
+        <span class="chip" style="background:${catColor(t.cat)}">${catName(t.cat)}</span>
+        <span class="tc-time">${esc(t.time||'--:--')}</span>
+      </div>
+      <div class="tc-title">${esc(t.title)}</div>
+      <div class="tc-meta">
+        ${pomoCount?`<span class="tc-pomo">${'🍅'.repeat(Math.min(pomoCount,5))}${pomoCount>5?'+'+ (pomoCount-5):''}</span>`:''}
+        ${t.scheduled?'<span class="tc-pomo">📌 预定</span>':''}
+      </div>
+      <div class="tc-actions">
+        ${t.done?'':`<button class="btn" onclick="openPomodoro('${t.id}')">🍅 开始专注</button>`}
+        <button class="btn ghost" onclick="toggleTask('${t.id}')">${t.done?'↩ 取消完成':'✓ 完成'}</button>
+        <button class="btn ghost" onclick="delTask('${t.id}')">删除</button>
+      </div>
+    </div>`;
+}
+
+function addTask(){
+  const title=document.getElementById('tTitle').value.trim();
+  if(!title){toast('先写点任务内容');return;}
+  const date = _viewDate || today();
+  const tasks=LS.get('tasks',[]);
+  tasks.push({id:uid(),title,cat:document.getElementById('tCat').value,time:document.getElementById('tTime').value,date, done:false});
+  LS.set('tasks',tasks);
+  document.getElementById('tTitle').value='';
+  _viewDate = null;
+  drawTaskBoard(); renderHome();
+  toast('已添加 ✓');
+}
+function toggleTask(id){
+  const t=LS.get('tasks',[]); const x=t.find(i=>i.id===id);
+  if(x){x.done=!x.done; if(x.done && x._doingPomo) stopPomodoro(false);}
+  LS.set('tasks',t); drawTaskBoard(); renderHome();
+}
+function delTask(id){
+  LS.set('tasks',LS.get('tasks',[]).filter(i=>i.id!==id));
+  drawTaskBoard(); drawScheduled(); renderHome();
+  toast('已删除');
+}
+
+function checkScheduledTasks(){
+  const notified = LS.get('scheduledNotified',[]);
+  const tasks = LS.get('tasks',[]).filter(t=>t.scheduled && t.date===today() && !t.done && !notified.includes(t.id));
+  tasks.forEach(t=>{
+    if(t.time && t.time <= nowStr()){
+      toast(`⏰ 预定任务到点：${t.title}`);
+      notified.push(t.id);
+    }
+  });
+  if(tasks.length) LS.set('scheduledNotified',notified);
 }
 
 /* ---- month plan ---- */
@@ -432,8 +694,6 @@ function renderMonthPlan(){
   const prevY = taskCalMonth===1 ? taskCalYear-1 : taskCalYear;
   const nextM = taskCalMonth===12 ? 1 : taskCalMonth+1;
   const nextY = taskCalMonth===12 ? taskCalYear+1 : taskCalYear;
-  const todayDate = today();
-  const [ty,tm,td] = todayDate.split('-').map(Number);
 
   return `
   <div class="cal-nav">
@@ -443,32 +703,20 @@ function renderMonthPlan(){
   </div>
   <div class="cal-grid" id="calGrid"></div>
   <p style="text-align:center;margin-top:12px">
-    <a href="#" onclick="taskView='day';renderTasks();return false" style="color:var(--accent)">📅 返回今日计划 →</a>
+    <a href="#" onclick="taskView='day';_viewDate=null;renderTasks();return false" style="color:var(--accent)">📅 返回今日计划 →</a>
   </p>`;
 }
-
 function drawMonthCal(){
-  const el = document.getElementById('calGrid');
-  if(!el) return;
-
+  const el = document.getElementById('calGrid'); if(!el) return;
   const y=taskCalYear, m=taskCalMonth;
-  const dim = calDaysInMonth(y,m);
-  const fd = calFirstDow(y,m);
-  const weeks = calWeeks(y,m);
+  const dim = calDaysInMonth(y,m), fd = calFirstDow(y,m), weeks = calWeeks(y,m);
   const todayDate = today();
   const [ty,tm,td] = todayDate.split('-').map(Number);
-
-  // gather tasks for this month
   const allTasks = LS.get('tasks',[]);
-  const taskMap = {}; // date -> count
-  allTasks.forEach(t=>{
-    if(!t.date) return;
-    taskMap[t.date] = (taskMap[t.date]||0) + 1;
-  });
-
+  const taskMap = {};
+  allTasks.forEach(t=>{ if(t.date) taskMap[t.date]=(taskMap[t.date]||0)+1; });
   const dayNames = ['一','二','三','四','五','六','日'];
   let html = '<div class="cal-header">'+dayNames.map(d=>`<div class="cal-day-hd">${d}</div>`).join('')+'</div>';
-
   let day=1;
   for(let w=0; w<weeks; w++){
     html += '<div class="cal-row">';
@@ -479,11 +727,10 @@ function drawMonthCal(){
         const dateStr = fmtCalDate(y,m,day);
         const isToday = (y===ty && m===tm && day===td);
         const taskCount = taskMap[dateStr]||0;
-        const hasTasks = taskCount>0;
-        const cls = ['cal-cell', isToday?'today':'', hasTasks?'has-tasks':''].filter(Boolean).join(' ');
+        const cls = ['cal-cell', isToday?'today':'', taskCount>0?'has-tasks':''].filter(Boolean).join(' ');
         html += `<div class="${cls}" onclick="openDayPlan('${dateStr}')">
           <span class="cal-num">${day}</span>
-          ${hasTasks?`<span class="cal-dot">${taskCount}</span>`:''}
+          ${taskCount>0?`<span class="cal-dot">${taskCount}</span>`:''}
         </div>`;
         day++;
       }
@@ -492,51 +739,131 @@ function drawMonthCal(){
   }
   el.innerHTML = html;
 }
-
 function openDayPlan(dateStr){
-  // Temporarily set today-like context, then jump to day view
-  // We'll just navigate to day view — user sees today's tasks,
-  // but we add a date picker concept: clicking a day opens it.
-  // For now, go to day view and show a quick message.
-  taskView='day';
-  // Store the "viewing date" temporarily
-  window._viewDate = dateStr;
-  renderTasks();
-  // Show tasks for that date in the task list
-  drawTaskListForDate(dateStr);
+  taskView='day'; _viewDate=dateStr; renderTasks();
   setTimeout(()=>toast(`📅 查看 ${dateStr} 的任务`), 300);
 }
 
-function drawTaskListForDate(dateStr){
-  const tasks = LS.get('tasks',[]).filter(t=>t.date===dateStr).sort((a,b)=>(a.time||'').localeCompare(b.time||''));
-  const el = document.getElementById('taskCount');
-  if(el) el.textContent = `${tasks.filter(t=>t.done).length}/${tasks.length} 已完成 · ${dateStr}`;
-  const listEl = document.getElementById('taskList');
-  if(!listEl) return;
-  listEl.innerHTML = tasks.length? tasks.map(t=>`
-    <div class="task ${t.done?'done':''}">
-      <div class="chk" onclick="toggleTask('${t.id}')">${t.done?'✓':''}</div>
-      <div class="time">${esc(t.time||'--:--')}</div>
-      <div class="tt">${esc(t.title)}<div class="cat"><span class="chip" style="background:${catColor(t.cat)}">${catName(t.cat)}</span></div></div>
-      <button class="btn ghost sm" onclick="delTask('${t.id}')">删除</button>
-    </div>`).join('') : `<div class="empty">${dateStr} 还没有任务<br><a href="#" onclick="taskView='day';renderTasks();return false" style="color:var(--accent);font-size:12px">回到今日计划</a></div>`;
+/* ---- pomodoro ---- */
+let pomoState = null; // {taskId, endAt, paused, totalSec, mode, iv}
+const POMO_QUOTES = [
+  "你只要尝试过飞，日后走路时也会仰望天空。因为那是你曾经到过，并渴望回去的地方。",
+  "种一棵树最好的时间是十年前，其次是现在。",
+  "专注不是一直做一件事，而是一次只做一件事。",
+  "每一个番茄钟，都是在为未来的自己存一笔时间。",
+  "此刻的专注，是下一条爆款的伏笔。"
+];
+function openPomodoro(taskId){
+  const tasks=LS.get('tasks',[]); const t=tasks.find(i=>i.id===taskId); if(!t) return;
+  stopExistingPomo();
+  const s=getPomoSettings();
+  pomoState = {taskId, mode:'focus', totalSec:s.focus*60, paused:false, endAt:Date.now()+s.focus*60000};
+  renderPomodoroOverlay(t.title);
+  pomoState.iv = setInterval(tickPomodoro, 1000);
 }
-
-function addTask(){
-  const title=document.getElementById('tTitle').value.trim();
-  if(!title){toast('先写点任务内容');return;}
-  // Use _viewDate if set, otherwise today
-  const date = window._viewDate || today();
-  const tasks=LS.get('tasks',[]);
-  tasks.push({id:uid(),title,cat:document.getElementById('tCat').value,time:document.getElementById('tTime').value,date, done:false});
-  LS.set('tasks',tasks);
-  document.getElementById('tTitle').value='';
-  window._viewDate = null;
-  drawTaskList(); renderHome();
-  toast('已添加 ✓');
+function stopExistingPomo(){ if(pomoState){clearInterval(pomoState.iv); pomoState=null;} }
+function renderPomodoroOverlay(taskTitle){
+  const quote = POMO_QUOTES[Math.floor(Math.random()*POMO_QUOTES.length)];
+  const overlay = document.createElement('div');
+  overlay.className='pomo-overlay'; overlay.id='pomoOverlay';
+  overlay.innerHTML = `
+    <button class="pomo-close" onclick="stopPomodoro(false)">×</button>
+    <div class="pomo-quote">“${quote}”</div>
+    <div class="pomo-task">当前任务：<b>${esc(taskTitle)}</b></div>
+    <div class="pomo-time" id="pomoTime">25:00</div>
+    <div class="pomo-mode" id="pomoMode">专注中</div>
+    <div class="pomo-controls">
+      <button onclick="togglePomoPause()" id="pomoPauseBtn" title="暂停/继续">⏸</button>
+      <button class="pomo-main" onclick="stopPomodoro(true)" title="完成专注">✓</button>
+      <button onclick="resetPomo()" title="重置">↻</button>
+    </div>
+    <div class="pomo-settings">
+      专注 <input type="number" id="pomoFocus" value="${getPomoSettings().focus}" min="1" max="120" onchange="savePomoSettings()"> 分
+      休息 <input type="number" id="pomoBreak" value="${getPomoSettings().break}" min="1" max="60" onchange="savePomoSettings()"> 分
+    </div>`;
+  document.body.appendChild(overlay);
 }
-function toggleTask(id){const t=LS.get('tasks',[]);const x=t.find(i=>i.id===id);if(x)x.done=!x.done;LS.set('tasks',t);drawTaskList();renderHome();}
-function delTask(id){LS.set('tasks',LS.get('tasks',[]).filter(i=>i.id!==id));drawTaskList();renderHome();toast('已删除');}
+function tickPomodoro(){
+  if(!pomoState || pomoState.paused) return;
+  const left = Math.max(0, Math.ceil((pomoState.endAt - Date.now())/1000));
+  updatePomoDisplay(left);
+  if(left===0){
+    if(pomoState.mode==='focus'){
+      completePomodoroFocus();
+    } else {
+      toast('🍅 休息结束！准备下一轮');
+      stopExistingPomo();
+      document.getElementById('pomoOverlay')?.remove();
+    }
+  }
+}
+function updatePomoDisplay(sec){
+  const m=String(Math.floor(sec/60)).padStart(2,'0'), s=String(sec%60).padStart(2,'0');
+  const el=document.getElementById('pomoTime'); if(el) el.textContent=`${m}:${s}`;
+}
+function togglePomoPause(){
+  if(!pomoState) return;
+  const btn=document.getElementById('pomoPauseBtn');
+  if(pomoState.paused){
+    pomoState.endAt = Date.now() + pomoState.totalSec*1000;
+    pomoState.paused=false; if(btn) btn.textContent='⏸';
+  } else {
+    pomoState.totalSec = Math.max(0, Math.ceil((pomoState.endAt-Date.now())/1000));
+    pomoState.paused=true; if(btn) btn.textContent='▶';
+  }
+}
+function resetPomo(){
+  if(!pomoState) return;
+  const s=getPomoSettings();
+  const sec = pomoState.mode==='focus' ? s.focus*60 : s.break*60;
+  pomoState.totalSec=sec; pomoState.endAt=Date.now()+sec*1000; pomoState.paused=false;
+  document.getElementById('pomoPauseBtn').textContent='⏸';
+  updatePomoDisplay(sec);
+}
+function completePomodoroFocus(){
+  if(!pomoState) return;
+  const tasks=LS.get('tasks',[]); const t=tasks.find(i=>i.id===pomoState.taskId);
+  if(t){ t.pomodoros=(t.pomodoros||0)+1; if(!t.done) t.done=true; LS.set('tasks',tasks); }
+  const s=getPomoSettings();
+  const min=Math.max(1, Math.round(s.focus));
+  const blocks=LS.get('blocks',[]);
+  blocks.push({id:uid(),cat:t?t.cat:'other',title:t?t.title:'番茄专注',min,date:today(),at:nowStr()});
+  LS.set('blocks',blocks);
+  toast(`🍅 完成一个番茄钟，已计入 ${min} 分钟`);
+  // auto start break
+  pomoState.mode='break'; pomoState.totalSec=s.break*60; pomoState.endAt=Date.now()+s.break*60000; pomoState.paused=false;
+  document.getElementById('pomoMode').textContent='休息中';
+  document.querySelector('.pomo-main').textContent='✓';
+  document.querySelector('.pomo-main').setAttribute('onclick','stopPomodoro(false)');
+  drawTaskBoard(); renderHome();
+}
+function stopPomodoro(record){
+  if(record && pomoState && pomoState.mode==='focus'){
+    const elapsed = Math.max(1, Math.round((getPomoSettings().focus*60 - pomoState.totalSec)/60));
+    const tasks=LS.get('tasks',[]); const t=tasks.find(i=>i.id===pomoState.taskId);
+    if(t){ t.pomodoros=(t.pomodoros||0)+1; if(!t.done) t.done=true; LS.set('tasks',tasks); }
+    const blocks=LS.get('blocks',[]);
+    blocks.push({id:uid(),cat:t?t.cat:'other',title:t?t.title:'番茄专注',min:elapsed,date:today(),at:nowStr()});
+    LS.set('blocks',blocks);
+    toast(`已记录 ${elapsed} 分钟专注`);
+  }
+  stopExistingPomo();
+  document.getElementById('pomoOverlay')?.remove();
+  drawTaskBoard(); renderHome();
+}
+function savePomoSettings(){
+  const focus = Math.max(1, parseInt(document.getElementById('pomoFocus').value)||25);
+  const breakMin = Math.max(1, parseInt(document.getElementById('pomoBreak').value)||5);
+  LS.set('pomoSettings',{focus,break:breakMin});
+  if(pomoState && !pomoState.paused){
+    const s=getPomoSettings();
+    pomoState.totalSec = pomoState.mode==='focus' ? s.focus*60 : s.break*60;
+    pomoState.endAt = Date.now() + pomoState.totalSec*1000;
+    updatePomoDisplay(pomoState.totalSec);
+  }
+  toast('番茄钟设置已保存');
+}
+function openPomoSettings(){ renderTasks(); toast('番茄钟设置已显示在顶部标签旁，开始任意任务后可在专注界面调整'); }
 
 /* =========================================================
  *  TIME TRACKER + EFFICIENCY  (real cumulative data)
@@ -851,74 +1178,97 @@ function addReview(){
 function delReview(id){LS.set('reviews',LS.get('reviews',[]).filter(r=>r.id!==id));drawReviews();renderHome();}
 
 /* =========================================================
- *  INSPIRATION (每日灵感)
+ *  INSPIRATION (每日灵感) — 卡片列表 + 平台搜索链接
  * ========================================================= */
 const INSP_POOL=[
-  {q:'拍一条「和闺蜜的深夜真话局」',a:'固定机位+真实问答，用白描字幕收尾，不煽情',tip:'来自热梗「我的朋友 我该怎么擦拭眼泪」'},
-  {q:'做「歌名就是文案」系列第 N 期',a:'每条视频锚定一首歌名，统一封面形成记忆点',tip:'来自热梗「歌名就是文案」'},
-  {q:'和姐妹测「一代人有一代人的美食人格」',a:'边吃边测，快节奏对话剪辑，评论区对号入座',tip:'高热度话题 5847万'},
-  {q:'翻出老照片做「多年对比」混剪',a:'时间线串接+克制旁白，强怀旧共鸣',tip:'来自热梗「青春如同奔流的江河」'},
-  {q:'拍「带闺蜜看痴迷的后果 belike」',a:'分屏对比「我以为 vs 实际」，性别反转喜剧',tip:'热梗改写，强化群像人设'},
-  {q:'记录一次「小城漫游」反向安利',a:'带外地姐妹逛家乡，locals 视角记录生活气',tip:'结合「中国成为外国游客消暑度假新选择」'},
-  {q:'拍一期「饭桌名场面」家庭喜剧',a:'固定饭桌机位，谁最搞笑谁当主角',tip:'来自热梗「徐梦桃饭桌变小品现场」'},
-  {q:'做「和过去的自己和解」接力',a:'姐妹轮流念给18岁自己的一句话',tip:'热梗「我曾心比天高志无穷」'},
-  {q:'练习「一个眼神讲完一个故事」',a:'每天一个特写情绪镜头，做群像片的情绪锚点',tip:'来自热梗「悲天悯人眼神杀」'},
-  {q:'用 AI 复原老照片里的姐妹合照',a:'技术为情感服务，可做情怀向短片',tip:'来自2026灵感「科技亦人文」'},
-  {q:'和姐妹发起一个二次元/游戏接力挑战',a:'共创内容天然是群像协作',tip:'来自2026灵感「打破次元」'},
-  {q:'拍「被投喂后怎么越吃越饿」日常',a:'突出被爱投喂的幸福感，结尾抛互动问句',tip:'来自热梗「被投喂后…」'}
+  {q:'把「内耗」拍成具象动作：越想越僵的定格 vs 一个向上叹气松下来',a:'内耗/焦虑是全民情绪切口，把抽象情绪拍成可表演动作，自带二创性。',tags:['思考','情绪','群像'],douyin:'内耗 具象动作 定格',bili:'内耗 视频创作'},
+  {q:'成年人「假装没事」崩溃瞬间合集（最后1秒反转治愈）',a:'表面稳如老狗内心慌得一批，极易引发共鸣；结尾反转治愈，完播率高。',tags:['搞笑','治愈','群像'],douyin:'假装没事 崩溃瞬间',bili:'成年人崩溃瞬间'}, 
+  {q:'和闺蜜拍「深夜真话局」：一问一答，用白描字幕收尾',a:'固定机位+真实问答，不煽情，靠真实感留住人。',tags:['群像','友情','真实'],douyin:'闺蜜深夜谈话',bili:'闺蜜问答'}, 
+  {q:'做「歌名就是文案」系列：每条视频锚定一首歌名',a:'降低文案负担、形成记忆点、利于合集与搜索。',tags:['文案','系列','选题'],douyin:'歌名文案',bili:'歌名文案 短视频'}, 
+  {q:'和姐妹测「一代人有一代人的美食人格」',a:'美食+群像+测试，三重流量因子叠加，易引发评论区对号入座。',tags:['美食','测试','群像'],douyin:'美食人格测试',bili:'美食人格'}, 
+  {q:'翻出老照片做「多年对比」混剪',a:'时间线串接+克制旁白，强怀旧共鸣，适合节日/周年节点。',tags:['回忆','混剪','群像'],douyin:'多年对比',bili:'老照片混剪'}, 
+  {q:'拍「带闺蜜看痴迷的后果 belike」反转版',a:'分屏对比「我以为 vs 实际」，姐妹互怼喜剧，强化群像人设。',tags:['搞笑','反转','群像'],douyin:'带闺蜜 痴迷 belike',bili:'闺蜜互怼'}, 
+  {q:'记录一次「小城漫游」反向安利家乡',a:'带外地姐妹逛家乡，locals视角记录生活气，避开网红打卡内卷。',tags:['旅行','vlog','在地'],douyin:'小城漫游',bili:'家乡vlog'}, 
+  {q:'拍一期「饭桌名场面」家庭喜剧',a:'固定饭桌机位，谁最搞笑谁当主角，生活喜剧群像，低成本高复看。',tags:['家庭','喜剧','饭桌'],douyin:'饭桌名场面',bili:'家庭喜剧'}, 
+  {q:'做「和过去的自己和解」接力',a:'姐妹轮流念给18岁自己的一句话，自我观照是2026情绪关键词。',tags:['成长','自我','群像'],douyin:'和过去自己和解',bili:'18岁的自己'}, 
+  {q:'练习「一个眼神讲完一个故事」特写镜头',a:'每天一个特写情绪镜头，作为群像片的情绪锚点。',tags:['镜头','情绪','练习'],douyin:'眼神杀 情绪镜头',bili:'镜头语言 特写'}, 
+  {q:'用 AI 复原老照片里的姐妹合照',a:'技术为情感服务，可做情怀向短片；结合科技亦人文趋势。',tags:['AI','情怀','科技'],douyin:'AI复原老照片',bili:'AI修复老照片'}
 ];
 let inspIdx = (()=>{ const d=today(); let s=0; for(const c of d)s+=c.charCodeAt(0); return s%INSP_POOL.length; })();
+
 function renderInspiration(){
-  const it=INSP_POOL[inspIdx];
   const rec=(window.DOUYIN_DATA&&window.DOUYIN_DATA.remixIdeas)||[];
+  const items = [];
+  for(let i=0;i<5;i++){
+    const idx = (inspIdx + i) % INSP_POOL.length;
+    items.push({...INSP_POOL[idx], n:i+1});
+  }
   document.getElementById('view-inspiration').innerHTML=`
-  <div class="grid cols-2">
-    <div>
-      <div class="insp">
-        <div class="small muted">${today()} · 今日灵感</div>
-        <div class="q">${esc(it.q)}</div>
-        <div class="a">${esc(it.a)}</div>
-        <div class="tip">${esc(it.tip)}</div>
-        <div style="margin-top:18px"><button class="btn" onclick="nextInsp()">🎲 换一个灵感</button></div>
-      </div>
-      <div class="card" style="margin-top:18px">
-        <h3>📌 灵感收藏夹</h3>
-        <div id="inspSaved"></div>
-      </div>
-    </div>
-    <div class="card">
-      <h3>🔥 今日可蹭的热点角度 <span class="tag">实时</span></h3>
+  <div class="insp-header">
+    <h3>🔥 每日灵感来源 <span class="small muted">（${today()} 更新 · 共 ${INSP_POOL.length} 条）</span></h3>
+    <p>每天 09:00 自动更新创作灵感。每条附「看相关视频」跳转链接——点开即跳对应平台搜索相关作品。</p>
+    <button class="btn" style="margin-top:12px" onclick="nextInsp()">🎲 换一批灵感</button>
+  </div>
+
+  <div class="insp-list">
+    ${items.map(it=>inspCard(it)).join('')}
+  </div>
+
+  <div class="card" style="margin-top:20px">
+    <h3>🔥 今日可蹭的热点角度 <span class="tag">实时</span></h3>
+    <div class="grid cols-2">
       ${rec.slice(0,4).map(r=>`<div class="idea"><h4>${esc(r.title)}</h4><p><span class="k">钩子：</span>${esc(r.hook)}</p><p><span class="k">形式：</span>${esc(r.format)}</p></div>`).join('')}
     </div>
+  </div>
+
+  <div class="card" style="margin-top:18px">
+    <h3>📌 灵感收藏夹</h3>
+    <div id="inspSaved"></div>
   </div>`;
   drawInspSaved();
 }
+
+function inspCard(it){
+  const douyinUrl = `https://www.douyin.com/search/${encodeURIComponent(it.douyin||it.q.slice(0,20))}`;
+  const biliUrl = `https://search.bilibili.com/all?keyword=${encodeURIComponent(it.bili||it.q.slice(0,20))}`;
+  return `
+    <div class="insp-card">
+      <div class="ic-title">${it.n}. ${esc(it.q)}</div>
+      <div class="ic-tags">
+        ${it.tags.map(tag=>`<span class="ic-tag">${esc(tag)}</span>`).join('')}
+      </div>
+      <div class="ic-desc">${esc(it.a)}</div>
+      <div class="ic-actions">
+        <button class="btn" onclick="window.open('${escAttr(douyinUrl)}','_blank')">▶ 看抖音相关视频</button>
+        <button class="btn btn-ghost" onclick="window.open('${escAttr(biliUrl)}','_blank')">▶ B站相关</button>
+        <button class="btn btn-ghost" onclick="saveInsp(${inspIdx + it.n - 1})">☆ 收藏</button>
+      </div>
+    </div>`;
+}
+
+function nextInsp(){inspIdx=(inspIdx+5)%INSP_POOL.length;renderInspiration();}
 let inspSaved = LS.get('inspSaved',[]);
-function nextInsp(){inspIdx=(inspIdx+1)%INSP_POOL.length;renderInspiration();}
+function saveInsp(idx){
+  const it = INSP_POOL[idx % INSP_POOL.length];
+  if(!inspSaved.includes(it.q)){inspSaved.push(it.q);LS.set('inspSaved',inspSaved);drawInspSaved();toast('💡 已收藏灵感');}
+}
 function drawInspSaved(){
   const el=document.getElementById('inspSaved'); if(!el)return;
-  el.innerHTML = inspSaved.length? inspSaved.map(s=>`<div class="bm"><span>💡</span><span style="flex:1">${esc(s)}</span><button class="btn ghost sm" onclick="delInsp('${escAttr(s)}')">删</button></div>`).join('') : '<div class="empty">双击灵感卡片收藏到这里</div>';
+  el.innerHTML = inspSaved.length? inspSaved.map(s=>`<div class="bm"><span>💡</span><span style="flex:1">${esc(s)}</span><button class="btn ghost sm" onclick="delInsp('${escAttr(s)}')">删</button></div>`).join('') : '<div class="empty">点击灵感卡片的「收藏」按钮，把喜欢的选题存到这里</div>';
 }
-document.addEventListener('dblclick',e=>{
-  if(document.getElementById('view-inspiration').classList.contains('active') && e.target.closest('.insp')){
-    const it=INSP_POOL[inspIdx]; if(!inspSaved.includes(it.q)){inspSaved.push(it.q);LS.set('inspSaved',inspSaved);drawInspSaved();toast('💡 已收藏灵感');}
-  }
-});
 function delInsp(s){inspSaved=inspSaved.filter(x=>x!==s);LS.set('inspSaved',inspSaved);drawInspSaved();}
 
 /* =========================================================
- *  LEARNING (平台筛选 + 搜索 + 手动增删)
+ *  LEARNING (平台筛选 + 搜索 + 手动增删) — 卡片式 + 视频占位
  * ========================================================= */
 let learnCat='all', learnPlat='all', learnSearch='';
-/* per-user custom items stored in localStorage */
-let customItems = LS.get('customLearn',[]); // {name,type,plat,kw,tag,desc,url,category}
+let customItems = LS.get('customLearn',[]);
 
 function renderLearning(){
   const data=window.LEARNING_DATA||[];
   const PLATS=window.PLAT_LIST||["B站","抖音","小红书","微信","网页"];
   const allItems=function(){
     const out={}; data.forEach(c=>out[c.id]=c.items.slice());
-    // merge custom items into their categories
     customItems.forEach(ci=>{
       const cid=ci.category||'other-custom';
       if(!out[cid]) out[cid]=[];
@@ -962,21 +1312,49 @@ function renderLearning(){
     found=true;
     html+=`<div class="lcat"><div class="ic" style="background:${cat.color}">${cat.icon}</div>
       <div><b style="font-size:16px">${cat.name}</b><div class="small muted">${cat.desc} · ${its.length} 项</div></div></div>
-    <div class="grid cols-2" style="margin-bottom:22px">
-      ${its.map((it,idx)=>{
-        const url=it.url||(window.platSearch?window.platSearch(it.plat,it.kw):'');
-        const isCustom=it._custom;
-        return `<div class="lcard" ${url?`onclick="event.stopPropagation();window.open('${escAttr(url)}','_blank')" style="cursor:pointer"`:''}>
-          <div class="lt">${esc(it.name)} ${it.type?`<span class="ltag">${esc(it.type)}</span>`:''}<span class="plat ${esc(it.plat)}">${esc(it.plat)}</span></div>
-          <div class="ld">${esc(it.desc||'')}</div>
-          ${it.tag?`<span class="ltag">#${esc(it.tag)}</span>`:''}
-          ${url?`<span class="ltag" style="background:#eaf3ff;color:#4dabf7">↗ 打开</span>`:''}
-          ${isCustom?`<button class="del" onclick="event.stopPropagation();delCustomItem('${isCustom}')" title="删除">×</button>`:''}
-        </div>`;}).join('')}
+    <div class="res-list" style="margin-bottom:22px">
+      ${its.map((it,idx)=>resCard2(it,cat)).join('')}
     </div>`;
   });
   if(!found) html+='<div class="empty">没有匹配的资料，换个筛选试试</div>';
   document.getElementById('view-learning').innerHTML=html;
+}
+
+function resCard2(it,cat){
+  const url = it.url || (window.platSearch?window.platSearch(it.plat,it.kw):'');
+  const isCustom=it._custom;
+  const platIcon = {B站:'📺', 抖音:'🎵', 小红书:'📕', 微信:'💬', 网页:'🌐'}[it.plat] || '📄';
+  const meta = it.type ? `${it.type} · ${it.plat}` : it.plat;
+  const kw = it.kw || it.name;
+
+  const douyinUrl = `https://www.douyin.com/search/${encodeURIComponent(kw)}`;
+  const biliUrl = `https://search.bilibili.com/all?keyword=${encodeURIComponent(kw)}`;
+  const xhsUrl = `https://www.xiaohongshu.com/search_result?keyword=${encodeURIComponent(kw)}`;
+  const wxUrl = `https://weixin.sogou.com/weixin?query=${encodeURIComponent(kw)}`;
+
+  return `
+    <div class="res-card2">
+      <div class="rc-head">
+        <span class="plat ${esc(it.plat)}">${esc(it.plat)}</span>
+        ${it.type?`<span class="ltag">${esc(it.type)}</span>`:''}
+        ${it.tag?`<span class="ltag">#${esc(it.tag)}</span>`:''}
+      </div>
+      <div class="rc-title">${esc(it.name)}</div>
+      <div class="rc-desc">${esc(it.desc||'')}</div>
+      <div class="rc-thumb">
+        <div class="rc-plat-ico">${platIcon}</div>
+        <div class="rc-plat-name">${esc(it.plat)}学习资源</div>
+        <div class="rc-meta">${esc(meta)} · 点击对应平台按钮搜索</div>
+      </div>
+      <div class="rc-actions">
+        ${url?`<button class="btn" onclick="window.open('${escAttr(url)}','_blank')">▶ ${it.url?'打开链接':'看教学视频'}</button>`:''}
+        ${it.plat!=='B站'?`<button class="btn btn-ghost" onclick="window.open('${escAttr(biliUrl)}','_blank')">B站搜更多</button>`:''}
+        ${it.plat!=='抖音'?`<button class="btn btn-ghost" onclick="window.open('${escAttr(douyinUrl)}','_blank')">抖音跟练</button>`:''}
+        ${it.plat!=='小红书'?`<button class="btn btn-ghost" onclick="window.open('${escAttr(xhsUrl)}','_blank')">小红书参考</button>`:''}
+        ${it.plat!=='微信'?`<button class="btn btn-ghost" onclick="window.open('${escAttr(wxUrl)}','_blank')">微信搜索</button>`:''}
+        ${isCustom?`<button class="btn danger" onclick="delCustomItem('${isCustom}')">删除</button>`:''}
+      </div>
+    </div>`;
 }
 
 function addCustomItem(){
