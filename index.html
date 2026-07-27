@@ -170,6 +170,15 @@ button{cursor:pointer;font-family:inherit;font-size:14px;border:none;border-radi
 .ln-add{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;align-items:center}
 .ln-add input{flex:1;min-width:130px}
 .ln-add select{width:auto;min-width:100px}
+/* video case card */
+.vcase{background:var(--panel);border-radius:12px;padding:16px 18px;border:1px solid var(--line);transition:.15s}
+.vcase:hover{border-color:var(--accent);box-shadow:0 4px 16px rgba(217,145,157,.12)}
+.vcase .vh{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+.vcase .vh h4{font-size:14px;margin:0;line-height:1.4}
+.vcase .vdata{margin-bottom:6px}
+.vcase .vdata span{font-size:12px;color:var(--accent);font-weight:600}
+.vcase .vd{font-size:12px;line-height:1.7;margin:4px 0;color:var(--ink)}
+.vcase .vl{margin-top:10px}
 @media(max-width:900px){.cols-2,.cols-3,.cols-4{grid-template-columns:1fr}.top-right{display:none}}@media(max-width:560px){.app{grid-template-columns:52px 1fr}.brand b,.brand small,.nav-item .lb{display:none}.nav-item{justify-content:center;padding:9px 6px}.brand .dot{width:26px;height:26px;font-size:12px}}
 </style>
 </head>
@@ -601,6 +610,23 @@ function renderDouyin(){
         <p><span class="k">为什么：</span>${esc(r.why)}</p></div>`).join('')}
     </div>
   </div>
+
+  ${D.videoCases&&D.videoCases.length?`
+  <div class="card" style="margin-bottom:18px">
+    <h3>📺 真实爆款视频案例 <span class="tag">蝉妈妈日榜+新榜精选</span></h3>
+    <div class="grid cols-2">
+      ${D.videoCases.map(v=>`<div class="vcase" style="cursor:pointer" onclick="window.open('${escAttr(v.url)}','_blank')">
+        <div class="vh">
+          <h4>${esc(v.title)}</h4>
+          <span class="small muted">${esc(v.author)} · ${esc(v.category)}</span>
+        </div>
+        <div class="vdata"><span>👍 ${esc(v.likes)}</span></div>
+        <p class="vd"><span class="k">为什么火：</span>${esc(v.why)}</p>
+        <p class="vd"><span class="k" style="color:var(--accent)">你的二创方向：</span>${esc(v.adapt)}</p>
+        <div class="vl"><span class="ltag" style="background:#fef0f3;color:#d9919d">↗ 在抖音查看原视频</span></div>
+      </div>`).join('')}
+    </div>
+  </div>`:''}
 
   <div class="card">
     <h3>📜 新榜《2026创作指南》十大灵感选题 <span class="tag">已对齐你的赛道</span></h3>
