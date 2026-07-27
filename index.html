@@ -179,7 +179,26 @@ button{cursor:pointer;font-family:inherit;font-size:14px;border:none;border-radi
 .vcase .vdata span{font-size:12px;color:var(--accent);font-weight:600}
 .vcase .vd{font-size:12px;line-height:1.7;margin:4px 0;color:var(--ink)}
 .vcase .vl{margin-top:10px}
-@media(max-width:900px){.cols-2,.cols-3,.cols-4{grid-template-columns:1fr}.top-right{display:none}}@media(max-width:560px){.app{grid-template-columns:52px 1fr}.brand b,.brand small,.nav-item .lb{display:none}.nav-item{justify-content:center;padding:9px 6px}.brand .dot{width:26px;height:26px;font-size:12px}}
+/* task tabs */
+.task-tabs{display:flex;gap:8px;margin-bottom:18px}
+/* calendar */
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.cal-nav h2{font-size:18px;margin:0;color:var(--ink)}
+.cal-grid{background:var(--panel);border-radius:var(--radius);overflow:hidden;border:1px solid var(--line)}
+.cal-header{display:grid;grid-template-columns:repeat(7,1fr);background:var(--sidebar-bg);color:var(--sidebar-ink)}
+.cal-day-hd{text-align:center;padding:10px 4px;font-size:12px;font-weight:600}
+.cal-row{display:grid;grid-template-columns:repeat(7,1fr);border-bottom:1px solid var(--line)}
+.cal-row:last-child{border-bottom:none}
+.cal-cell{min-height:72px;padding:6px;border-right:1px solid var(--line);cursor:pointer;transition:.12s;position:relative}
+.cal-cell:last-child{border-right:none}
+.cal-cell.empty{background:var(--bg);cursor:default}
+.cal-cell:hover:not(.empty){background:#fdf2f4}
+.cal-cell.today{background:linear-gradient(135deg,rgba(217,145,157,.10),rgba(174,199,142,.08))}
+.cal-cell.today .cal-num{background:var(--accent);color:#fff;border-radius:50%;width:26px;height:26px;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
+.cal-cell .cal-num{font-size:13px;color:var(--ink);display:inline-block;margin-bottom:4px}
+.cal-cell.has-tasks .cal-dot{display:inline-block;font-size:10px;background:var(--accent2);color:#fff;border-radius:10px;padding:1px 7px;font-weight:600;margin-left:4px;vertical-align:top}
+.cal-cell.has-tasks::after{content:'';position:absolute;bottom:6px;right:8px;width:6px;height:6px;border-radius:50%;background:var(--accent2)}
+@media(max-width:900px){.cols-2,.cols-3,.cols-4{grid-template-columns:1fr}.top-right{display:none}}@media(max-width:560px){.app{grid-template-columns:52px 1fr}.brand b,.brand small,.nav-item .lb{display:none}.nav-item{justify-content:center;padding:9px 6px}.brand .dot{width:26px;height:26px;font-size:12px}.cal-cell{min-height:48px}}
 </style>
 </head>
 <body>
@@ -262,6 +281,12 @@ function fmtDate(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart
 function dateRange(days){const out=[];for(let i=days-1;i>=0;i--)out.push(daysAgo(i));return out;}
 function weekStart(){const d=new Date();const dow=d.getDay()||7;d.setDate(d.getDate()-dow+1);return fmtDate(d);}
 function monthStart(){const d=new Date();d.setDate(1);return fmtDate(d);}
+/* calendar helpers */
+function calYearMonth(d){return {year:d.getFullYear(),month:d.getMonth()+1};}
+function calDaysInMonth(y,m){return new Date(y,m,0).getDate();}
+function calFirstDow(y,m){const dow=new Date(y,m-1,1).getDay();return dow===0?7:dow;} // Mon=1..Sun=7
+function calWeeks(y,m){const dim=calDaysInMonth(y,m);const fd=calFirstDow(y,m);return Math.ceil((dim+fd-1)/7);}
+function fmtCalDate(y,m,d){return `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;}
 
 /* ---------- Router ---------- */
 const TITLES = {
@@ -340,13 +365,32 @@ function renderHome(){
 }
 
 /* =========================================================
- *  TASKS
+ *  TASKS — 每日计划表 + 每月计划表，互相链接
  * ========================================================= */
+let taskView='day'; // 'day' or 'month'
+let taskCalYear=0, taskCalMonth=0; // month view state
+
 function renderTasks(){
+  if(!taskCalYear){ const d=new Date(); taskCalYear=d.getFullYear(); taskCalMonth=d.getMonth()+1; }
+  const selDate = taskView==='day' ? today() : null;
+
   document.getElementById('view-tasks').innerHTML = `
+  <div class="task-tabs">
+    <button class="fbtn ${taskView==='day'?'active':''}" onclick="taskView='day';renderTasks()">📅 每日计划</button>
+    <button class="fbtn ${taskView==='month'?'active':''}" onclick="taskView='month';renderTasks()">🗓️ 每月计划</button>
+  </div>
+  ${taskView==='day' ? renderDayPlan() : renderMonthPlan()}`;
+
+  if(taskView==='day') drawTaskList();
+  else drawMonthCal();
+}
+
+/* ---- day plan ---- */
+function renderDayPlan(){
+  return `
   <div class="grid cols-3">
     <div class="card" style="grid-column:span 1">
-      <h3>➕ 添加任务</h3>
+      <h3>➕ 添加任务 <span class="small muted" style="font-weight:400">${today()}</span></h3>
       <div class="row" style="flex-direction:column;align-items:stretch">
         <input id="tTitle" placeholder="任务内容，如：和闺蜜拍『歌名文案』第3期">
         <div class="row">
@@ -355,19 +399,24 @@ function renderTasks(){
         </div>
         <button class="btn" onclick="addTask()">添加到今日</button>
       </div>
-      <p class="small muted" style="margin-top:12px">提示：时间节点帮你把一天切成节奏。绑定到「群像/家庭友情」等赛道后，可在时间效率统计里看分布。</p>
+      <p class="small muted" style="margin-top:12px">
+        提示：时间节点帮你把一天切成节奏。绑定赛道后可在效率统计看分布。<br>
+        <a href="#" onclick="taskView='month';renderTasks();return false" style="color:var(--accent)">🗓️ 查看本月计划 →</a>
+      </p>
     </div>
     <div class="card" style="grid-column:span 2">
       <h3>📋 今日任务 <span class="tag" id="taskCount"></span></h3>
       <div id="taskList"></div>
     </div>
   </div>`;
-  drawTaskList();
 }
+
 function drawTaskList(){
   const tasks = LS.get('tasks',[]).filter(t=>t.date===today()).sort((a,b)=>(a.time||'').localeCompare(b.time||''));
-  document.getElementById('taskCount').textContent = `${tasks.filter(t=>t.done).length}/${tasks.length} 已完成`;
-  document.getElementById('taskList').innerHTML = tasks.length? tasks.map(t=>`
+  const el = document.getElementById('taskCount'); if(el) el.textContent = `${tasks.filter(t=>t.done).length}/${tasks.length} 已完成`;
+  const listEl = document.getElementById('taskList');
+  if(!listEl) return;
+  listEl.innerHTML = tasks.length? tasks.map(t=>`
     <div class="task ${t.done?'done':''}">
       <div class="chk" onclick="toggleTask('${t.id}')">${t.done?'✓':''}</div>
       <div class="time">${esc(t.time||'--:--')}</div>
@@ -376,13 +425,113 @@ function drawTaskList(){
       <button class="btn ghost sm" onclick="delTask('${t.id}')">删除</button>
     </div>`).join('') : '<div class="empty">还没有任务，左边添加一条吧</div>';
 }
+
+/* ---- month plan ---- */
+function renderMonthPlan(){
+  const prevM = taskCalMonth===1 ? 12 : taskCalMonth-1;
+  const prevY = taskCalMonth===1 ? taskCalYear-1 : taskCalYear;
+  const nextM = taskCalMonth===12 ? 1 : taskCalMonth+1;
+  const nextY = taskCalMonth===12 ? taskCalYear+1 : taskCalYear;
+  const todayDate = today();
+  const [ty,tm,td] = todayDate.split('-').map(Number);
+
+  return `
+  <div class="cal-nav">
+    <button class="btn ghost sm" onclick="taskCalYear=${prevY};taskCalMonth=${prevM};renderTasks()">◀ 上月</button>
+    <h2>${taskCalYear}年 ${taskCalMonth}月</h2>
+    <button class="btn ghost sm" onclick="taskCalYear=${nextY};taskCalMonth=${nextM};renderTasks()">下月 ▶</button>
+  </div>
+  <div class="cal-grid" id="calGrid"></div>
+  <p style="text-align:center;margin-top:12px">
+    <a href="#" onclick="taskView='day';renderTasks();return false" style="color:var(--accent)">📅 返回今日计划 →</a>
+  </p>`;
+}
+
+function drawMonthCal(){
+  const el = document.getElementById('calGrid');
+  if(!el) return;
+
+  const y=taskCalYear, m=taskCalMonth;
+  const dim = calDaysInMonth(y,m);
+  const fd = calFirstDow(y,m);
+  const weeks = calWeeks(y,m);
+  const todayDate = today();
+  const [ty,tm,td] = todayDate.split('-').map(Number);
+
+  // gather tasks for this month
+  const allTasks = LS.get('tasks',[]);
+  const taskMap = {}; // date -> count
+  allTasks.forEach(t=>{
+    if(!t.date) return;
+    taskMap[t.date] = (taskMap[t.date]||0) + 1;
+  });
+
+  const dayNames = ['一','二','三','四','五','六','日'];
+  let html = '<div class="cal-header">'+dayNames.map(d=>`<div class="cal-day-hd">${d}</div>`).join('')+'</div>';
+
+  let day=1;
+  for(let w=0; w<weeks; w++){
+    html += '<div class="cal-row">';
+    for(let d=0; d<7; d++){
+      if((w===0 && d<fd-1) || day>dim){
+        html += '<div class="cal-cell empty"></div>';
+      } else {
+        const dateStr = fmtCalDate(y,m,day);
+        const isToday = (y===ty && m===tm && day===td);
+        const taskCount = taskMap[dateStr]||0;
+        const hasTasks = taskCount>0;
+        const cls = ['cal-cell', isToday?'today':'', hasTasks?'has-tasks':''].filter(Boolean).join(' ');
+        html += `<div class="${cls}" onclick="openDayPlan('${dateStr}')">
+          <span class="cal-num">${day}</span>
+          ${hasTasks?`<span class="cal-dot">${taskCount}</span>`:''}
+        </div>`;
+        day++;
+      }
+    }
+    html += '</div>';
+  }
+  el.innerHTML = html;
+}
+
+function openDayPlan(dateStr){
+  // Temporarily set today-like context, then jump to day view
+  // We'll just navigate to day view — user sees today's tasks,
+  // but we add a date picker concept: clicking a day opens it.
+  // For now, go to day view and show a quick message.
+  taskView='day';
+  // Store the "viewing date" temporarily
+  window._viewDate = dateStr;
+  renderTasks();
+  // Show tasks for that date in the task list
+  drawTaskListForDate(dateStr);
+  setTimeout(()=>toast(`📅 查看 ${dateStr} 的任务`), 300);
+}
+
+function drawTaskListForDate(dateStr){
+  const tasks = LS.get('tasks',[]).filter(t=>t.date===dateStr).sort((a,b)=>(a.time||'').localeCompare(b.time||''));
+  const el = document.getElementById('taskCount');
+  if(el) el.textContent = `${tasks.filter(t=>t.done).length}/${tasks.length} 已完成 · ${dateStr}`;
+  const listEl = document.getElementById('taskList');
+  if(!listEl) return;
+  listEl.innerHTML = tasks.length? tasks.map(t=>`
+    <div class="task ${t.done?'done':''}">
+      <div class="chk" onclick="toggleTask('${t.id}')">${t.done?'✓':''}</div>
+      <div class="time">${esc(t.time||'--:--')}</div>
+      <div class="tt">${esc(t.title)}<div class="cat"><span class="chip" style="background:${catColor(t.cat)}">${catName(t.cat)}</span></div></div>
+      <button class="btn ghost sm" onclick="delTask('${t.id}')">删除</button>
+    </div>`).join('') : `<div class="empty">${dateStr} 还没有任务<br><a href="#" onclick="taskView='day';renderTasks();return false" style="color:var(--accent);font-size:12px">回到今日计划</a></div>`;
+}
+
 function addTask(){
   const title=document.getElementById('tTitle').value.trim();
   if(!title){toast('先写点任务内容');return;}
+  // Use _viewDate if set, otherwise today
+  const date = window._viewDate || today();
   const tasks=LS.get('tasks',[]);
-  tasks.push({id:uid(),title,cat:document.getElementById('tCat').value,time:document.getElementById('tTime').value,date:today(),done:false});
+  tasks.push({id:uid(),title,cat:document.getElementById('tCat').value,time:document.getElementById('tTime').value,date, done:false});
   LS.set('tasks',tasks);
   document.getElementById('tTitle').value='';
+  window._viewDate = null;
   drawTaskList(); renderHome();
   toast('已添加 ✓');
 }
